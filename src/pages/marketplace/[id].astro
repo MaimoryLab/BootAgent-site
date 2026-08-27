@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { localePath } from "../../i18n";
+import { marketplaceItems, marketplaceKindLabels } from "../../lib/marketplace";
+export function getStaticPaths() { return marketplaceItems.map((item) => ({ params: { id: item.id }, props: { item } })); }
+const { item } = Astro.props;
+---
+<BaseLayout title={`${item.name} — 工具市场 — BootAgent`} description={item.description}>
+  <section class="page-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">{marketplaceKindLabels.zh[item.kind]} · {item.source}</p><h1 class="page-title">{item.name}</h1></div><p class="lede">{item.description}</p></div></section>
+  <section class="section section-compact"><div class="shell marketplace-detail"><div><h2>来源与使用方式</h2><p>BootAgent 只负责发现和整理条目，不代替原项目安装，也不接管你的账号或凭证。</p><div class="marketplace-tags">{item.tags.map((tag) => <span>{tag}</span>)}</div></div><aside><p class="eyebrow">官方来源</p><a class="button button-primary" href={item.url} rel="noopener">打开 {item.source}</a><p><a href={localePath("zh-CN", "marketplace/")}>返回工具市场</a></p></aside></div></section>
+</BaseLayout>

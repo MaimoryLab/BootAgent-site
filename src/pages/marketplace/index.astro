@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { localePath } from "../../i18n";
+import { marketplaceItems, marketplaceKindLabels } from "../../lib/marketplace";
+const kinds = ["all", "tool", "mcp", "framework"] as const;
+---
+<BaseLayout title="工具市场 — BootAgent" description="发现可与 AI 开发环境配合使用的 Agent、MCP 和工作流工具。">
+  <section class="page-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">Marketplace</p><h1 class="page-title">工具市场</h1></div><p class="lede">从官方目录和可信来源发现 Agent、MCP 与开发工具。每个条目都标明来源，安装动作回到原始项目完成。</p></div></section>
+  <section class="section section-compact"><div class="shell marketplace-shell">
+    <div class="marketplace-toolbar" role="group" aria-label="市场分类">
+      {kinds.map((kind, index) => <button type="button" class:list={["marketplace-filter", { "is-active": index === 0 }]} data-marketplace-filter={kind}>{kind === "all" ? "全部" : marketplaceKindLabels.zh[kind]}</button>)}
+    </div>
+    <div class="marketplace-grid" data-marketplace-grid>
+      {marketplaceItems.map((item) => <article class="marketplace-card" data-marketplace-kind={item.kind}><div class="marketplace-card-top"><span class="marketplace-kind">{marketplaceKindLabels.zh[item.kind]}</span><span class="marketplace-source">{item.source}</span></div><h2>{item.name}</h2><p>{item.description}</p><div class="marketplace-tags">{item.tags.map((tag) => <span>{tag}</span>)}</div><a class="button button-secondary" href={localePath("zh-CN", `marketplace/${item.id}/`)}>查看详情</a></article>)}
+    </div>
+    <p class="marketplace-empty" data-marketplace-empty hidden>这个分类暂时没有条目。</p>
+  </div></section>
+</BaseLayout>
+<script>
+  const filters = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-marketplace-filter]"));
+  const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-marketplace-kind]"));
+  const empty = document.querySelector<HTMLElement>("[data-marketplace-empty]");
+  filters.forEach((filter) => filter.addEventListener("click", () => { const kind = filter.dataset.marketplaceFilter; filters.forEach((item) => item.classList.toggle("is-active", item === filter)); let visible = 0; cards.forEach((card) => { const show = kind === "all" || card.dataset.marketplaceKind === kind; card.hidden = !show; if (show) visible += 1; }); if (empty) empty.hidden = visible > 0; }));
+</script>

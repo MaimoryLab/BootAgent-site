@@ -43,7 +43,7 @@ export function localePath(locale: Locale, path = ""): string {
  * — which validate-build.mjs fails the build over. Add a route here in the same
  * change that adds its translation.
  */
-export const translatedRoutes = new Set(["", "downloads/", "quickstart/", "explore/", "security/", "help/"]);
+export const translatedRoutes = new Set(["", "downloads/", "quickstart/", "explore/", "security/", "help/", "marketplace/"]);
 
 /**
  * Prefixes whose every child route is translated, for families generated from a
@@ -55,7 +55,7 @@ export const translatedRoutes = new Set(["", "downloads/", "quickstart/", "explo
  * declared no hreflang alternates, so nothing told a crawler the two were
  * translations of each other.
  */
-const translatedPrefixes = ["help/"];
+const translatedPrefixes = ["help/", "marketplace/"];
 
 /** True for a route that exists in every locale, including collection children. */
 export function isTranslated(route: string): boolean {
