@@ -581,21 +581,33 @@ test.describe("mainland-China download mirror", () => {
       (await page.locator("a[data-cn-href]").count()) === 0,
       "The Gitee mirror had no assets for this release at build time.",
     );
-    /* Selected explicitly: the test browsers carry a Windows user agent, so the
-       page's own detection moves the picker off the macOS default. */
+    /* Driven by which panels the build marked as mirrored rather than by naming
+       platforms: the mirror's inventory grows release by release (Windows joined
+       it mid-review), and a test that says "platform X is not mirrored" decays
+       the moment the mirror catches up — the same trap the planned-platform
+       assertion above already fell into once. The picker is driven explicitly
+       because the test browsers carry a Windows user agent and the page's own
+       detection would otherwise move it. */
     const picker = page.getByRole("group", { name: "选择平台与架构" });
-    await picker.locator('input[value="macos-arm64"]').check();
-    // macOS is mirrored: primary points at Gitee, note appears with a GitHub fallback.
-    await expect(primary).toHaveAttribute("href", /^https:\/\/gitee\.com\/[^/]+\/[^/]+\/releases\/download\//);
     const note = page.locator("[data-mirror-note]");
+
+    const mirrored = page.locator("[data-release-panel][data-download-cn-url]").first();
+    const mirroredId = await mirrored.getAttribute("data-release-panel");
+    await picker.locator(`input[value="${mirroredId}"]`).check();
+    await expect(primary).toHaveAttribute("href", /^https:\/\/gitee\.com\/[^/]+\/[^/]+\/releases\/download\//);
     await expect(note).toBeVisible();
     await expect(note.getByRole("link")).toHaveAttribute("href", /^https:\/\/github\.com\//);
 
-    // Windows is not on the mirror: the swap must leave it on GitHub, and the
-    // mirror note must not claim otherwise.
-    await picker.locator('input[value="windows-x64"]').check();
-    await expect(primary).toHaveAttribute("href", /^https:\/\/github\.com\/[^/]+\/[^/]+\/releases\/download\/.*windows/);
-    await expect(note).toBeHidden();
+    /* A target the mirror does not carry must stay on GitHub with the note
+       hidden — asserted only while such a target exists. Once the mirror hosts
+       every artifact this branch has nothing left to prove and says so. */
+    const unmirrored = page.locator("[data-release-panel][data-download-url]:not([data-download-cn-url])").first();
+    if ((await unmirrored.count()) > 0) {
+      const unmirroredId = await unmirrored.getAttribute("data-release-panel");
+      await picker.locator(`input[value="${unmirroredId}"]`).check();
+      await expect(primary).toHaveAttribute("href", /^https:\/\/github\.com\/[^/]+\/[^/]+\/releases\/download\//);
+      await expect(note).toBeHidden();
+    }
   });
 });
 

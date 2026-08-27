@@ -13,9 +13,9 @@ const checksumUrl =
   channel?.targets.flatMap((target) => target.artifacts).find((artifact) => artifact.checksumUrl)?.checksumUrl ?? null;
 ---
 <BaseLayout
-  title={published ? "Download BootAgent — technical preview" : "Download BootAgent — not yet released"}
+  title={published ? "Download BootAgent — macOS, Windows & Linux" : "Download BootAgent — not yet released"}
   description={published
-    ? "Download the BootAgent technical preview. The macOS build is signed and notarised by Apple; artifacts ship through GitHub Releases with a published checksum manifest."
+    ? "Pick an installer currently available for your platform: the macOS build is notarised by Apple, and no account is needed."
     : "BootAgent has not been released publicly yet. Once it is, this page will list each platform's installer."}
 >
   <header class="page-hero">
