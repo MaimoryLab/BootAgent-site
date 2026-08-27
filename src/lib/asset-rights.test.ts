@@ -25,6 +25,7 @@ const licensesDirectory = join(process.cwd(), "licenses");
 
 const imageFiles = readdirSync(directory).filter((name) => name !== "asset-rights.json");
 const recorded = Object.entries(rights.assets as Record<string, Record<string, string>>);
+const trademarkRecorded = Object.entries((rights.trademarkAssets ?? {}) as Record<string, Record<string, string>>);
 
 /* The two manifests record different things and so require different fields.
    Agent marks are third-party artwork redistributed under a licence, so each
@@ -40,7 +41,7 @@ describe("bundled agent marks are auditable", () => {
   // reader believe an absent mark is covered.
   it("records every image that ships, and ships every image it records", () => {
     expect(imageFiles.map((name) => name.replace(/\.(svg|png)$/, "")).sort())
-      .toEqual(recorded.map(([id]) => id).sort());
+      .toEqual([...recorded, ...trademarkRecorded].map(([id]) => id).sort());
   });
 
   for (const [id, asset] of recorded) {
@@ -65,6 +66,17 @@ describe("bundled agent marks are auditable", () => {
         const name = asset.licenseSource.replace(/^licenses\//, "");
         expect(readdirSync(licensesDirectory), `${id} references a missing licence`).toContain(name);
       });
+    });
+  }
+});
+
+describe("trademark agent marks are identified separately", () => {
+  for (const [id, asset] of trademarkRecorded) {
+    it(`${id} records its source, owner and identification basis`, () => {
+      for (const field of ["file", "source", "copyrightOwner", "basis"]) {
+        expect(asset[field], `${id} is missing ${field}`).toBeTruthy();
+      }
+      expect(readFileSync(join(directory, asset.file)).byteLength).toBeGreaterThan(0);
     });
   }
 });

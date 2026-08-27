@@ -75,5 +75,19 @@
       "sha256": "d82978781b824273c55473822c1f243a6ed34fc6e8c2dbfe1a90dfc66ae43ee8",
       "note": "Pi's own blocked-out wordmark, not Inflection's Pi.ai assistant (lobe-icons publishes that separately as inflection.svg). Upstream verified the geometry against pi.dev/logo-auto.svg; this copy is preferred because pi.dev's hardcodes #000/#fff in a prefers-color-scheme block and cannot take the theme colour."
     }
+  },
+  "trademarkAssets": {
+    "workbuddy": {
+      "file": "workbuddy.png",
+      "source": "WorkBuddy.app/Contents/Resources/icon.icns from the official WorkBuddy application",
+      "copyrightOwner": "Tencent",
+      "basis": "Trademark used only to identify the WorkBuddy product in a compatibility row; not presented as BootAgent artwork."
+    },
+    "zcode": {
+      "file": "zcode.png",
+      "source": "ZCode.app/Contents/Resources/icon.png from the official ZCode application",
+      "copyrightOwner": "Z.ai",
+      "basis": "Trademark used only to identify the ZCode product in a compatibility row; not presented as BootAgent artwork."
+    }
   }
 }
