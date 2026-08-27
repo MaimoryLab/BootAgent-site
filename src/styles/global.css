@@ -446,6 +446,22 @@ button, select { color: inherit; }
 .agent-mark-wrap { width: 34px; height: 34px; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
 .agent-mark-wrap img { width: var(--mark-size); height: var(--mark-size); object-fit: contain; }
 .agent-fallback { font-size: 13px; font-weight: 650; }
+.marketplace-shell { max-width: 1180px; }
+.marketplace-toolbar { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+.marketplace-filter { padding: 9px 15px; border: 1px solid var(--line-strong); border-radius: var(--radius-control); background: transparent; cursor: pointer; }
+.marketplace-filter.is-active, .marketplace-filter:hover { color: var(--on-accent); background: var(--accent); border-color: var(--accent); }
+.marketplace-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.marketplace-card { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+.marketplace-card h2 { margin: 18px 0 8px; font-size: 22px; }
+.marketplace-card p { min-height: 54px; color: var(--ink-soft); }
+.marketplace-card-top { display: flex; justify-content: space-between; gap: 8px; color: var(--ink-faint); font-size: 12px; }
+.marketplace-kind { color: var(--accent); font-weight: 700; }
+.marketplace-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0; }
+.marketplace-tags span { padding: 4px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-faint); font-size: 12px; }
+.marketplace-empty { color: var(--ink-faint); }
+.marketplace-detail { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 48px; }
+.marketplace-detail h2 { margin-top: 0; }
+@media (max-width: 800px) { .marketplace-grid { grid-template-columns: 1fr; } .marketplace-detail { grid-template-columns: 1fr; gap: 24px; } }
 
 .chip { min-height: 26px; padding: 3px 8px; display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-soft); background: var(--surface); font-size: 11px; font-weight: 600; white-space: nowrap; }
 /* Neutral like the base chip: 托管配置 is a fact about support, not a state that

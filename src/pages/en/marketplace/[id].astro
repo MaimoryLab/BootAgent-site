@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { localePath } from "../../../i18n";
+import { marketplaceItems, marketplaceKindLabels } from "../../../lib/marketplace";
+export function getStaticPaths() { return marketplaceItems.map((item) => ({ params: { id: item.id }, props: { item } })); }
+const { item } = Astro.props;
+---
+<BaseLayout title={`${item.name} — Marketplace — BootAgent`} description={item.descriptionEn}>
+  <section class="page-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">{marketplaceKindLabels.en[item.kind]} · {item.source}</p><h1 class="page-title">{item.name}</h1></div><p class="lede">{item.descriptionEn}</p></div></section>
+  <section class="section section-compact"><div class="shell marketplace-detail"><div><h2>Source and usage</h2><p>BootAgent helps you discover this item. Installation stays with the original project, and BootAgent never takes custody of your credentials.</p><div class="marketplace-tags">{item.tags.map((tag) => <span>{tag}</span>)}</div></div><aside><p class="eyebrow">Official source</p><a class="button button-primary" href={item.url} rel="noopener">Open {item.source}</a><p><a href={localePath("en", "marketplace/")}>Back to Marketplace</a></p></aside></div></section>
+</BaseLayout>
