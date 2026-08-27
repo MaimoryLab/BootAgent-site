@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "source": {
-    "release": "v0.5.0",
-    "commit": "0fbbe9402a50bb5e711275f369d1485efea272e0",
-    "published_at": "2026-08-10",
-    "verified_at": "2026-08-10"
+    "release": "v0.8.0",
+    "commit": "3b9e5a4534d7ce41c96b9944d6102b3cb8e906df",
+    "published_at": "2026-08-26",
+    "verified_at": "2026-08-27"
   },
   "navigation": [
     {
@@ -102,20 +102,20 @@
     "installed_version": "1.0.0",
     "agent_states": {
       "codex": {
-        "installed": false,
-        "configured": false
+      "installed": true,
+      "configured": false
       },
-      "claude-code": {
-        "installed": false,
-        "configured": false
+  "claude-code": {
+    "installed": false,
+    "configured": false
       },
-      "opencode": {
-        "installed": false,
-        "configured": false
+  "opencode": {
+    "installed": true,
+    "configured": true
       },
-      "kilo-cli": {
-        "installed": false,
-        "configured": false
+  "kilo-cli": {
+    "installed": false,
+    "configured": false
       },
       "aider": {
         "installed": false,
@@ -133,10 +133,26 @@
         "installed": false,
         "configured": false
       },
-      "workbuddy": {
-        "installed": false,
-        "configured": false
-      }
+  "workbuddy": {
+    "installed": true,
+    "configured": true
+  },
+  "workbuddy-intl": {
+    "installed": true,
+    "configured": false
+  },
+  "dsh-desktop": {
+    "installed": false,
+    "configured": false
+  },
+  "claude-desktop": {
+    "installed": false,
+    "configured": false
+  },
+  "zcode": {
+    "installed": false,
+    "configured": false
+  }
     }
   }
 }

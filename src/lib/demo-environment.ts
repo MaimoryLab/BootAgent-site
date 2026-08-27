@@ -159,7 +159,7 @@ export function localizedDemoLabel(value: { labels: Record<DemoLocale, string> }
 }
 
 /* The Explorer has its own illustrative machine-state fixture. It is intentionally
- * separate from the activation walkthrough, whose audited v0.4.0 scenario starts
+ * separate from the activation walkthrough, whose audited v0.8.0 scenario starts
  * with Claude Code uninstalled so the install task remains truthful. */
 const explorerStates: Readonly<Record<string, ExplorerDemoAgentState>> = {
   codex: { installed: true, configured: false, status: "attention", version: "behind", hasBackup: true },

@@ -44,16 +44,14 @@ command — which is what the previous copies were fetched with — now 404s.
 change in either file fails the build rather than rendering a broken page.
 
 Current copies were refreshed from tag `v0.8.0` (commit `3b9e5a4`) on
-2026-08-27; the activation walkthrough remains pinned to `v0.5.0` (commit
-`0fbbe94`), whose screens it mirrors. Earlier copies tracked a `main` commit because no
+2026-08-27; the activation walkthrough now follows the v0.8.0 desktop flow while
+remaining deterministic and local. Earlier copies tracked a `main` commit because no
 tag existed; that workaround is no longer needed.
 
-The lock-file contents have not changed since `v0.3.0` — `v0.4.0` and `v0.5.0` both
-left them byte-identical, which is checked rather than assumed each time. What
-advances with the release is the provenance reference and the UI flow the demo
-mirrors. `v0.5.0` changed the provider editor, the settings page and the transfer
-page; none of those sit on the walkthrough's path (`agents → profile → provider →
-model → review → install → overview`), so the demo needed only its baseline updated.
+The lock-file contents have not changed since `v0.3.0`, which is checked rather than
+assumed each time. What advances with the release is the provenance reference and
+the UI flow the demo mirrors. The v0.8.0 demo now includes the current desktop and
+task-center navigation while keeping the activation path deterministic.
 
 The v0.8.0 command-line contract is ten agents, all `config_mode: auto`, ranked:
 `dsh` (DeepSeek Harness, rank 1), `codex`, `claude-code`, `opencode`, `kilo-cli`,

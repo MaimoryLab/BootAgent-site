@@ -18,18 +18,18 @@ function reachProfile() {
   return activationReducer(state, { type: "continue-agents" }, scenario);
 }
 
-describe("v0.5.0 activation demo contract", () => {
+describe("v0.8.0 activation demo contract", () => {
   /* Fails whenever the pinned baseline moves, which is the point: bumping the
      release here should be a deliberate act that follows an audit of what changed
      upstream, not a value someone edits to make a red test go green.
-     v0.5.0 touched the provider editor, settings and transfer pages — none of them
-     on the walkthrough's path — so the flow itself needed no change. */
+     v0.8.0 keeps the activation path deterministic while adding the current
+     desktop/task-center navigation to the surrounding environment shell. */
   it("pins the demo to the audited BootAgent release", () => {
     expect(activationDemo.source).toMatchObject({
-      release: "v0.5.0",
-      commit: "0fbbe9402a50bb5e711275f369d1485efea272e0",
-      publishedAt: "2026-08-10",
-      verifiedAt: "2026-08-10",
+      release: "v0.8.0",
+      commit: "3b9e5a4534d7ce41c96b9944d6102b3cb8e906df",
+      publishedAt: "2026-08-26",
+      verifiedAt: "2026-08-27",
     });
   });
 
