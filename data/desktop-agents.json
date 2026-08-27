@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "internal/desktopapp/registry.go",
-  "source_ref": "v0.7.1",
-  "source_commit": "4fe376cb",
+  "source_ref": "v0.8.0",
+  "source_commit": "3b9e5a4",
   "note": "Transcribed by hand from upstream's Go registry, which has no generated lock file. Rank follows the registry's declaration order (first entry renders first). See data/README.md.",
   "agents": {
     "dsh-desktop": {
